@@ -1,0 +1,31 @@
+use StdIO: all;
+use ScalarArith: all;
+
+longlong fibonacci(longlong f, longlong s, longlong rep, int N) {
+  first = f;
+  second = s;
+  next = 0ll;
+
+  while (rep > 0ll) {
+    first = f;
+    second = s + rep;
+    for (i = 0; i < N; i++ ) {
+      next = first + second%2ll + rep;
+      first = second;
+      second = next - rep;
+    }
+    rep--;
+  }
+  return first;
+}
+
+int main() {
+  rep = 10000ll;
+  N=1000000-1;
+
+  first = fibonacci(0ll, 1ll, rep, N);
+
+  printf("\nResult with rep = %lld and N = %d : %lld\n", rep, N, first);
+  return 0;
+} 
+
