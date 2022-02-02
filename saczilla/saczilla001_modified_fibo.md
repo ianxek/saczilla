@@ -7,6 +7,8 @@ _Abstract_
 > that side-effects and term rewriting play a large role there. And I won’t tell you more because
 > it’s not really an abstract.
 
+## Background
+
 I discovered the [SaC programming language](https://www.sac-home.org/doku.php) on january 20th 2022.
 I had a shock. Coming from Matlab, Julia, Python and C/C++ I had _never_ heard of SaC, yet it has
 all the features I want for my needs in scientific computations, and good expressivity, especially
@@ -33,15 +35,16 @@ I’m not trying to be nice, nor actually trying to be mean.
 
 ## What’s my goal in this post ?
 
-In this first post on the SaC language for hardcore scientists, I will present a very simple code
-with _surprising_ results. Everyone knows the Fibonacci sequence, and many use it as a µbenchmark
-when they look at a new language they want to explore. Now in order to compare SaC with gcc/clang I
-wrote a modified Fibonacci that tries to lengthen the computation by making apparent modifications
-which in fact are not modifications in the end : they’re meant to slow things down but not change
-anything to the final result. We thus test the capacity of the compiler to help humans deal with
-what they're not really good at, i.e. repetitive and automatic tasks. So I don’t want a compiler to
-_just_ translate the code to another language, I want it also to work for me and elide my stupidity
-wherever possible.
+In this first post on the SaC language for hardcore neuron-bulging no BS scientists (aka
+physicists), I will present a very simple code with _surprising_ results. Everyone knows the
+Fibonacci sequence, and many use it as a µbenchmark when they look at a new language they want to
+explore. Now in order to compare SaC with gcc/clang I wrote a modified Fibonacci that tries to
+lengthen the computation by making apparent modifications which in fact are not modifications in the
+end : they’re meant to slow things down but not change anything to the final result. We thus test
+the capacity of the compiler to help humans deal with what they're not really good at, i.e.
+repetitive and automatic tasks. So I don’t want a compiler to _just_ translate the code to another
+language, I want it also to work for me and elide my stupidity wherever possible -- and thus save
+CO2 too (I will also address that, and the solution to Goldbach conjecture, in a later post).
 
 ## About µbenchmarks
 
@@ -70,9 +73,10 @@ interesting because the result is `n(n+1)/2` then I totally disagree. It is inde
 occasions where a human knows the result that it is interesting to see how a computer finds his way
 through the (trivial) maze.
 
-For more on µbenchmarks, you're better off reading from of the masters directly, Daniel Lemire,
-who's got a very [well thought approach to the
-field](https://lemire.me/blog/2018/01/16/microbenchmarking-calls-for-idealized-conditions/).
+For more on µbenchmarks, you're better off reading from of the masters directly, like Daniel Lemire,
+who's got a very [solid approach to the
+field](https://lemire.me/blog/2018/01/16/microbenchmarking-calls-for-idealized-conditions/) even
+though he's not a physicist (see definition above), at least officially.
 
 ## SaC's opinionated approach to scientific computing
 
@@ -87,7 +91,7 @@ SaC thus is closer to what scientists typically want to do with a language, i.e.
 and let the language deal with the rest. But then scientists (I mean physicists, applied maths,
 etc.) accept to abandon every possible control to the compiler. This is exactly what I have
 experienced with Matlab, Mathematica, and many others. The difference with SaC is that it offers
-some kind of formal optimization possibilities (term rewriting) in the world of numeric, and allows
+some kind of formal optimization possibilities (term rewriting) in the world of numerics, and allows
 one to escape the appalling slowness of standard mathematical platforms while allowing a new
 approach to expressivity, something we'll see in later posts... Ok, ok, here’s an appetiser : SaC
 has recently topped it’s standard powerful syntax with some new sugar for tensor operations tailored
@@ -116,18 +120,20 @@ positive while the K/Q output is negative... To compute that Fibonacci number, i
 a type `int` with about 70 million bits or 10MB ! I told you I liked sidetracking.
 
 So, back to the code, I choose to always compute some stuff I add modulo 2, which of course ensures
-I can't overflow, and made a little trick so that the inner loop was not evidently independent of
+I can't overflow, and played a little trick so that the inner loop was not evidently independent of
 the outer loop. It's a very stupid trick, but that code is not meant to test _me_, but rather the
-_compiler_ and how he can find his way out of the bit bag. Initially, I wanted to give SaC some time
-to really show it's strength, because as you'll see SaC has an overhead compared to straight C. But
-then I noticed that something strange happened… the more I gave SaC space, the tinier `gcc` looked.
-It’s a bit like in ATS, the more verbose you are, the more powerful spells you can invoke, which
-just blows away all contenders. Why always refer to ATS ? Because I _really_ like ATS too, and
-because I feel SaC could live with ATS, and because this post is not a peer-reviewed publication and
-I can talk about what I want.
+_compiler_ and how he can find his way out of the bit bag.
+
+Initially, I wanted to give SaC some time to really show it's strength, because as you'll see SaC
+has an overhead compared to straight C. But then I noticed that something strange happened… the more
+I gave SaC space, the tinier `gcc` looked.  It’s a bit like in ATS, the more verbose you are, the
+more powerful spells you can invoke, which just blows away all contenders. Why always refer to ATS ?
+Because I _really_ like ATS too, and because I feel SaC could live with ATS, and because this post
+is not a peer-reviewed publication and I can talk about what I want.
 
 Here's the [C code on the right compared to the SaC
-one](https://github.com/ianxek/saczilla/tree/main/saczilla). The first aspect that stands out is the
+one](https://github.com/ianxek/saczilla/tree/main/saczilla). The first aspect that stands out -- apart
+from the fact that [I code in Vim](https://ianxek.github.io/why_vim.html) and you should too -- is the
 very high resemblance between both codes : SaC is much better used without specifying the types as
 we do in C, but since the compiler supposes that integer literals are `i32` we help it by adding a
 type suffix to those literals.
@@ -166,14 +172,14 @@ painful scene... gcc fails _miserably_ on trivial code.
 Yes, yes, I know, this depends on the `reps` mainly, but I wanted to show how it actually matters.
 How so ? Well, imagine many little snippets of code like that positioned at different places, with
 no obvious link but performing the same _kind_ of computation for a smaller number of reps each,
-with a total reps similar to mine here : then it will also slow down the global time, while being
+with a total reps similar to mine here, then it will also slow down the global time, while being
 very difficult to pinpoint using a performance analysis tool : you might have a few places that take
 p seconds, then many places taking `q<<p` seconds, and yet those `reps*q` seconds add up to much
 more than a few `p` ! If each of those little loops or similar are optimized away automatically,
 then so much so for the time spent manually optimising the code.
 
-It is not trendy nowadays to delegate the compilation to gcc, the cool kids on the block use llvm.
-And on my mac I actually use llvm, because `gcc` is an alias for `clang` which itself is the C
+It is not trendy nowadays to delegate the compilation to `gcc`, the cool kids on the block use `llvm`.
+And on my mac I actually use `llvm`, because `gcc` is an alias for `clang` which itself is the C
 frontend for `llvm`. But why ? I mean why not also work on the compiler itself, the one that spews
 out the machine code ? Why only focus on talking to LLVM ? I guess it’s a first step, but I also
 know that LLVM forbids language designers to tailor the optimisations to their language, that’s why
@@ -193,9 +199,11 @@ really, imagine changing a single letter randomly in a codebase, that will proba
 That’s actually something that would be interesting, pull a sample of 1000 codebases on github,
 compile, run the tests, and then change `n>0` non whitespace character randomly in a single file of
 the codebase and see how it compiles and runs the tests, then output a entropic fragility measure as
-a function of `n`. SBS told me that idea exists and is called `fuzzing`, I will look into that in
-later posts, here or on my nascent blog, as I will deem appropriate (I like “deem”, it sounds like
-I’m an authority).
+a function of `n`, like `CER(2) = [10,68]` which would mean that for `n=2` the compilation fails `10%` of
+the time while the execution fails `68%` of the time.
+
+SBS told me that idea exists and is called `fuzzing`, I will look into that in later posts, here or
+on my [nascent blog](https://ianxek.github.io/), as I will deem appropriate (I like “deem”, it sounds like I’m an authority).
 
 ## SaCzilla’s DNA
 
@@ -441,7 +449,7 @@ In the end, we have two loops which instead of one _inside_ the other, are one _
 we compute rep + N times, instead of `rep * N` times : it's a logarithmic time reduction effect ! So
 we go from `O(t)` to `O(log(t))`
 
-Reasoning with first order approximation, this is a gain of approximately `rep` : indeed, since
+Reasoning with first order approximation, this is a gain of approximately a factor of `rep` : indeed, since
 `rep << N` we have `(rep * N)/(rep + N) ~= rep`. This means that the C code compiled with `gcc` should
 see a running time proportional to `rep` and the SaC code compiled with `sac2c` should take a running
 time very much independent of rep, because it is the computation controlled by `N` that takes the
@@ -468,7 +476,7 @@ A bombasting confirmation of my prediction.
 So let us summarise the key aspects of SaC optimizations :
 
 1. SaC has lifted the inner loop out of the outside one, in effect producing two independent loops ;
-2. This lifting arises from the term rewriting that has allowed the compiler to prove that both
+2. this lifting arises from the term rewriting that has allowed the compiler to prove that both
    loops were in fact independent.
 
 So the SaC compiler sees that the first `while` computes the useful value of
@@ -488,14 +496,14 @@ About “axiomatic categorical monadic” did you know that the demi-god of math
 Vladimir Arnold -- who came from Russia to work in France -- taught the elite French students and
 complained that the typical one, when thinking `x * y = y * x` comments that “ah yes, multiplication
 is _commutative_”. Read Arnold, be enlightened. He’s the epitome of abstraction rooted in humus, or
-melting permafrost.
+rather melting permafrost.
 
 Why doesn't the standard C compiler do the same thing ?
 
 > Probably because those don't like algebraic simplifications,
 
 SBS told me. True, we are not using fields there, so there are some edge effects
-that can kick back. But that could be also taken into account by the compiler, make sure that the
+that can kick back. But that could also be taken into account by the compiler, making sure that the
 term rewriting is allowed ; SBS again :
 
 > C compilers typically refrain from applying associative law, as, strictly speaking, this does not
@@ -506,7 +514,8 @@ term rewriting is allowed ; SBS again :
 But given the FP nature of SaC, it doesn't need to _look_ for the absence of side-effects,
 because... there are none ! More precisely, but we’ll get to that in later posts,
 SaC clearly singles out the side-effective parts, so for SaC side-effects are easy to find
-exceptions, to be marked as such so as to warn the optimizer, and not the normal situations, like in C, where you have to look for the _absence_ or side-effects, which is like running in a swamp.
+exceptions, to be marked as such so as to warn the optimizer, and not the normal situations, like in C, where you have to look for the _absence_ of side-effects, or equivalently for the _absence_ of the word "monad" in an typical FP conversation. By the way, why didn't I see that word in SaC nor for that matter in ATS, both FP languages ? :thinking:
+
 
 ## After `sac2c` optimised code is then fed to `gcc`
 
@@ -522,6 +531,10 @@ show its strength, and that is what `rep` gave to SaC.
 ## Conclusion
 
 Try SaC, build the community, get rid of Matlab and stop eyeing its juiced girlfriend Julia. Also read the next posts.
+
+## Exercise
+
+> Estimate how many tons of CO2 was produced in the world while you were reading, or more realistically glazing over, that post.
 
 
 
