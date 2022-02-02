@@ -20,7 +20,7 @@ long long fibonacci(long long f, long long s, long long rep, int N) {
 }
 
 int main() {
-  long long rep = 10000;
+  long long rep = 20000;
   int N=1000000-1;
 
   long long first = fibonacci(0ll, 1ll, rep, N);
