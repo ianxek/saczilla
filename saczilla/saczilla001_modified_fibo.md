@@ -1,4 +1,5 @@
-# A series of posts on SaC performance and use for physics and applied maths
+# SaC for physics and applied maths
+# 01 : Amazing optimisations or _The birth of SaCzilla_ : SaC & gcc vs gcc
 
 _Abstract_
 
@@ -52,20 +53,21 @@ In general, people have a love & hate relationship with µbenchmarks : they like
 they're favorable to their beloved language, and when it is not the case they find all kinds of
 excuses like "Oh, µbenchmarks are not interesting because they don't generalize to the situation
 encountered with more complex code where the timing depends on tons of other factors." Yes indeed,
-_sometimes_, but first we don't denigrate 100m sprinters because their performance doesn’t
-generalize to a marathon, and second :
+_sometimes_, but 
 
+0. We don't denigrate 100m sprinters because their performance doesn’t generalize to a
+   marathon.
 1. In a complex code, there might be gullets which perfectly fit the µbenchmark situation.
 2. We don't always write complex applications : statistically, most are short, just look at the
-   statistics of github which itself over-represents longer bigger codebases because who want to
-   push simple stuff and exhibit those to the public eye ?
+   statistics of github which itself over-represents longer bigger codebases because who wants to
+   push simple stuff and exhibit that to the public eye ?
 3. I'm a reductionist, and I believe that global performance is achieved by local performance, and I
    wouldn't trust someone telling me that “yes, this pillar is indeed weak, but once there will be a
    bunch packed together with a roof over your head it'll be fine, because then pillars don’t matter
    anymore, I can assure you, trust me”. Nope.
 
 It is also true that my code would be easy to correct by an average coder, but that's the point :
-why doesn't the compiler see what is obvious ?  If a compiler cannot help me solve trivial problems,
+why doesn't the compiler see what is obvious ? If a compiler cannot help me solve trivial problems,
 how can I expect it to help me solve anything complex ?
 
 If a computer miscalculates the sum of the first `n` integers, and someone answers "well, it's not
@@ -73,7 +75,7 @@ interesting because the result is `n(n+1)/2` then I totally disagree. It is inde
 occasions where a human knows the result that it is interesting to see how a computer finds his way
 through the (trivial) maze.
 
-For more on µbenchmarks, you're better off reading from of the masters directly, like Daniel Lemire,
+For more on µbenchmarks, you're better off reading from the masters directly, like Daniel Lemire,
 who's got a very [solid approach to the
 field](https://lemire.me/blog/2018/01/16/microbenchmarking-calls-for-idealized-conditions/) even
 though he's not a physicist (see definition above), at least officially.
@@ -97,7 +99,7 @@ approach to expressivity, something we'll see in later posts... Ok, ok, here’s
 has recently topped it’s standard powerful syntax with some new sugar for tensor operations tailored
 to the use of physicists et al. like me.
 
-SaC just doesn't compile locally : it needs to see the _whole_ code, with all the imports, in order
+SaC doesn't just compile locally : it needs to see the _whole_ code, with all the imports, in order
 to perform maximally. This means that the _imports_ are in fact _includes_ ! And this also explains
 why, with the default flags, the compiler seems darn slow. I mean, real slow, like Rust slow, yes,
 sorry. But contrary to Julia, it doesn't preload the BLAS library before running your `hello world`
@@ -148,7 +150,7 @@ hood and that can lead to come _quiproquo_. Let's go back to the µbenchmark.
 ## Results and analysis
 
 So what are the numbers ? Well, SaC gives the correct output of `2` :
-Compiled with `sac2c -v2` because -v2 tells you what the compiler is doing, but not with all the
+Compiled with `sac2c -v2` because `-v2` tells you what the compiler is doing, but not with all the
 gory details :
 
 ```
@@ -188,7 +190,7 @@ many designers relying on LLVM dream of another backend for their creation.
 _If you have the resources_ to optimise your code manually, folding your code over [Bakhvalov's
 book](https://www.amazon.com/Performance-Analysis-Tuning-Modern-CPUs/dp/B08R6MTM7K),
 then you might reach the same performance. But then you'll need to do that for each program you
-write. So SaC is meant to delegate that performance tuning to the compiler, `sac2c` This is why SaC
+write. So SaC is meant to delegate that performance tuning to the compiler, namely `sac2c`. This is why SaC
 has been working on the compiler for 30 years, and why you need very
 competent postdocs to change any feature, because everything holds on everything else and one needs
 to make sure that small local perturbations will not crack the whole edifice. It's like any code
