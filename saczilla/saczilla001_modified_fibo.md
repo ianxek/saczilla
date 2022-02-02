@@ -15,8 +15,8 @@ I had a shock. Coming from Matlab, Julia, Python and C/C++ I had _never_ heard o
 all the features I want for my needs in scientific computations, and good expressivity, especially
 with its `with` loop. It has both an industrial look, together with the FP smoothness, you know,
 this academic texture. So it’s built by academics for engineering purposes. But SaC is quasi-absent
-from the web outside of its academic den. I saw a reference there from 2011 stating SaC was “state
-of the art”.
+from the web outside of its academic den. I saw a reference somewhere from 2011 stating SaC was “state
+of the art”... but a state of the art that has had no echo since.
 
 I thus had the idea of a series of posts around SaC benchmarks, and will write them with the help of
 Sven-Bodo Scholz (hereafter SBS): he helps me figure out what SaC is doing (also what I’m doing) and
@@ -514,9 +514,12 @@ term rewriting is allowed ; SBS again :
 > hope that it would detect the absence of side effects in this case….
 
 But given the FP nature of SaC, it doesn't need to _look_ for the absence of side-effects,
-because... there are none ! More precisely, but we’ll get to that in later posts,
-SaC clearly singles out the side-effective parts, so for SaC side-effects are easy to find
-exceptions, to be marked as such so as to warn the optimizer, and not the normal situations, like in C, where you have to look for the _absence_ of side-effects, or equivalently for the _absence_ of the word "monad" in an typical FP conversation. By the way, why didn't I see that word in SaC nor for that matter in ATS, both FP languages ? :thinking:
+because... there are none ! More precisely, but we’ll get to that in later posts, SaC clearly
+singles out the side-effective parts, so for SaC side-effects are easy to find exceptions, to be
+marked as such so as to warn the optimizer, and not the normal situations, like in C, where you have
+to look for the _absence_ of side-effects, or equivalently for the _absence_ of the word "monad" in
+an typical FP conversation. By the way, why didn't I see that word in SaC nor for that matter in
+ATS, both FP languages ? :thinking:
 
 
 ## After `sac2c` optimised code is then fed to `gcc`
@@ -525,7 +528,7 @@ But let's not forget that once this optimization is done, it feeds the rewritten
 itself, which can now apply its own optimizations.
 
 We can indeed see that when using `sac2c` it produces a `.c` file which is quite impressive : it took our
-30 LOC original program and output a... `1792` LOC program ! But of course there is a quasi fixed cost,
+`30` LOC original program and output a... `1792` LOC program ! But of course there is a quasi fixed cost,
 i.e. a quasi fixed overhead : for me, it's like the difference between starting at the gunshot with
 your legs vs. someone starting a bit later with a dragster, i.e. you need space for the dragster to
 show its strength, and that is what `rep` gave to SaC.
