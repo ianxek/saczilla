@@ -51,8 +51,8 @@ CO2 too (I will also address that, and the solution to Goldbach conjecture, in a
 
 In general, people have a love & hate relationship with µbenchmarks : they like it as long as
 they're favorable to their beloved language, and when it is not the case they find all kinds of
-excuses like "Oh, µbenchmarks are not interesting because they don't generalize to the situation
-encountered with more complex code where the timing depends on tons of other factors." Yes indeed,
+excuses like "_Oh, µbenchmarks are not interesting because they don't generalize to the situation
+encountered with more complex code where the timing depends on tons of other factors._" Yes indeed,
 _sometimes_, but 
 
 0. We don't denigrate 100m sprinters because their performance doesn’t generalize to a
@@ -70,8 +70,8 @@ It is also true that my code would be easy to correct by an average coder, but t
 why doesn't the compiler see what is obvious ? If a compiler cannot help me solve trivial problems,
 how can I expect it to help me solve anything complex ?
 
-If a computer miscalculates the sum of the first `n` integers, and someone answers "well, it's not
-interesting because the result is `n(n+1)/2` then I totally disagree. It is indeed in those rare
+If a computer miscalculates the sum of the first `n` integers, and someone answers "_well, it's not
+interesting because the result is `n(n+1)/2`_" then I totally disagree. It is indeed in those rare
 occasions where a human knows the result that it is interesting to see how a computer finds his way
 through the (trivial) maze.
 
