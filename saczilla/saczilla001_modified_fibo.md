@@ -1,5 +1,5 @@
 # SaC for physics and applied maths
-# 01 : Amazing optimisations or _The birth of SaCzilla_ : SaC & gcc vs gcc
+# 01 : _The birth of SaCzilla_
 
 _Abstract_
 
