@@ -1,4 +1,7 @@
 # SaC for physics and applied maths
+
+_Author_ : Yann Le Du aka [ianxek](https://ianxek.github.io)
+
 # 01 : _The birth of SaCzilla_
 
 _Abstract_
@@ -542,6 +545,3 @@ Try SaC, build the community, get rid of Matlab and stop eyeing its juiced girlf
 
 > Estimate how many tons of CO2 was produced in the world while you were reading, or more realistically glazing over, that post.
 
-
----
-Author : Yann Le Du aka [ianxek](ianxek@protonmail.com)
