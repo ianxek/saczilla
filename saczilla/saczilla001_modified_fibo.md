@@ -539,7 +539,8 @@ show its strength, and that is what `rep` gave to SaC.
 
 ## Conclusion
 
-Try SaC, build the community, get rid of Matlab and stop eyeing its juiced girlfriend Julia. Also read the next posts.
+Try SaC, build the [community](https://www.sac-home.org/slack), get rid of Matlab and stop eyeing
+its juiced girlfriend Julia. Also read the next posts.
 
 ## Exercise
 
