@@ -19,15 +19,16 @@ from the web outside of its academic den. I saw a reference somewhere from 2011 
 of the art”... but a state of the art that has had no echo since.
 
 I thus had the idea of a series of posts around SaC benchmarks, and will write them with the help of
-Sven-Bodo Scholz (hereafter SBS): he helps me figure out what SaC is doing (also what I’m doing) and
-I write about what I do and what I think about all that. Then SBS can say what he thinks about my
-interpretation. So it is a very open-minded series, where an end-user with no serious CS background,
-like me, is exploring the possibilities offered by SaC compared to other languages. So I’ll just say
-what I think about all that, and everything I say about SaC is checked by SBS, so he might (not)
-agree with the rest (you’ll have to guess !) and of course many other will definitely not agree, and
-that’s what makes the whole series interesting too : have people discover SaC, see it’s wondrous and
-surprisingly unknown power, and start using it, and have others teach me where I’m wrong and why
-they chose not to use SaC because of course they have thought deeply about that.
+Sven-Bodo Scholz (hereafter SBS) who is SaC's designer and one of the main contributors : he helps
+me figure out what SaC is doing (also what I’m doing) and I write about what I do and what I think
+about all that. Then SBS can say what he thinks about my interpretation. So it is a very open-minded
+series, where an end-user with no serious CS background, like me, is exploring the possibilities
+offered by SaC compared to other languages. So I’ll just say what I think about all that, and
+everything I say about SaC is checked by SBS, so he might (not) agree with the rest (you’ll have to
+guess !) and of course many other will definitely not agree, and that’s what makes the whole series
+interesting too : have people discover SaC, see it’s wondrous and surprisingly unknown power, and
+start using it, and have others teach me where I’m wrong and why they chose not to use SaC because
+of course they have thought deeply about that.
 
 This series is a screenshot of my current reflection, i.e. a thoughtshot, which of course can evolve
 as other people enlighten me. It is thus an informed (thanks to SBS) yet biassed (thanks to me)
@@ -542,4 +543,5 @@ Try SaC, build the community, get rid of Matlab and stop eyeing its juiced girlf
 > Estimate how many tons of CO2 was produced in the world while you were reading, or more realistically glazing over, that post.
 
 
-
+---
+Author : Yann Le Du aka [ianxek](ianxek@protonmail.com)
